@@ -1,0 +1,127 @@
+//Smartest Set
+
+//A smart-set is a set of distinct numbers in which all the elements have the same number of 1s in their binary form. The set of all smallest elements from each smart-set
+//that can be formed from a given array of distinct positive numbers is known as the smartest-set.
+
+//So given an array of distinct numbers, outline the elements of the smartest-set in ascending sorted order.
+//Example
+
+//Let the array be {6 , 2 , 11 , 1 , 9 , 14 , 13 , 4 , 18}.
+//In binary form the set is {110, 010, 1011, 0001, 1001, 1110, 1101, 0100, 10010}.
+//The smart-sets are {1, 2, 4}, {6, 9, 18}, {11, 13, 14}.
+
+//The smartest-set is {1,6,11} as each element is the smallest element from each smart-set.
+
+
+//--
+//Start
+//--
+
+
+import java.util.*;
+ class SmartestSet
+{
+	static int count = 0;
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		while(n>0)
+		{
+			int l = sc.nextInt();
+			int b = 0;
+			int arr2[] = new int[l];
+			count = 0;
+			int a = 0;
+			int min = -1;
+			int index = 0;
+			int op[] = new int[l];
+			int arr[] = new int[l];
+			for(int i=0;i<l;i++)
+			{
+				arr[i] = sc.nextInt();
+				b = arr[i];
+				while(b > 0){
+					a = b % 2;
+					if(a == 1){
+						count++;
+					}
+					b = b/2 ;
+				}
+				arr2[i] = count;
+				count = 0;
+			}
+			for(int i=0; i<l-1; i++){
+				min = arr[i];
+				for(int j= i+1; j<l ; j++){
+					if(arr2[i] == arr2[j] && arr2[i]!= -1 && arr2[j]!= -1){
+						
+						if(arr[i] < arr[j] ){
+						    if(min > arr[i] && min != -1){
+						    	min = arr[i];
+						    }
+							
+						}
+						else{
+							if(min > arr[j] && min != -1){
+							min = arr[j];
+							}
+						
+						}
+						arr2[j] = -1;
+					}
+				}
+				
+				if(arr2[i] != -1 || arr2[i+1] != -1){
+				 	op[index] = min;
+				 	
+					index ++;	
+				}
+			
+			}
+			
+			if(arr2[l-1] != -1){
+				op[index] = arr[l-1];
+			}
+			
+			
+			int temp = 0;
+			    for (int i5 = 0; i5 < op.length; i5++)
+
+			{
+
+			        for (int i3 = 0; i3 < op.length - i5 - 1; i3++)
+			
+			        {
+			
+			            if (op[i3] > op[i3 + 1])
+			
+			            {
+			
+			                temp = op[i3];
+			
+			                op[i3] = op[i3 + 1];
+			
+			                op[i3 + 1] = temp;
+			
+			            }
+			
+			        }
+			
+			    }
+			
+			
+			for(int r = 0; r < op.length; r++){
+				if(op[r]  != 0){
+					System.out.print(op[r]);
+					System.out.print("   ");
+				}
+				
+			}
+			
+
+			n--;
+			System.out.println("");
+		}
+	}
+}
