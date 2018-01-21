@@ -1,3 +1,6 @@
+// Problem Statement :
+// https://harshgangwar.wordpress.com/2018/01/21/shawn-and-arrays/
+
 #include <bits/stdc++.h>
 #include <iostream>
 #include <iomanip>
